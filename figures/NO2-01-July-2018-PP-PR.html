@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<head>    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.6.0/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.6.0/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://rawcdn.githack.com/python-visualization/folium/master/folium/templates/leaflet.awesome.rotate.css"/>
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_560ad6f1e686422f9ef71a34b8a32ecc {
+                    position: relative;
+                    width: 100.0%;
+                    height: 500.0px;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+            </style>
+        
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+</head>
+<body>    
+    
+            <div class="folium-map" id="map_560ad6f1e686422f9ef71a34b8a32ecc" ></div>
+        
+</body>
+<script>    
+    
+            var map_560ad6f1e686422f9ef71a34b8a32ecc = L.map(
+                "map_560ad6f1e686422f9ef71a34b8a32ecc",
+                {
+                    center: [18.21646010162067, -66.4147362290886],
+                    crs: L.CRS.EPSG3857,
+                    zoom: 9,
+                    zoomControl: true,
+                    preferCanvas: false,
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_6e1e4ba88cc444b6ae6e6debd6eeca40 = L.tileLayer(
+                "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {"attribution": "Data by \u0026copy; \u003ca href=\"http://openstreetmap.org\"\u003eOpenStreetMap\u003c/a\u003e, under \u003ca href=\"http://www.openstreetmap.org/copyright\"\u003eODbL\u003c/a\u003e.", "detectRetina": false, "maxNativeZoom": 18, "maxZoom": 18, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
+            ).addTo(map_560ad6f1e686422f9ef71a34b8a32ecc);
+        
+    
+            var tile_layer_e2c2365e3e4d407b86c09da460c9cb09 = L.tileLayer(
+                "https://earthengine.googleapis.com/v1alpha/projects/earthengine-legacy/maps/52b1c08f8c0fbdbfb8cd8b1d15a51aa7-8b4813f1f2aaac8654a409490d820c3b/tiles/{z}/{x}/{y}",
+                {"attribution": "Map Data \u0026copy Google Earth Engine", "detectRetina": false, "maxNativeZoom": 18, "maxZoom": 18, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
+            ).addTo(map_560ad6f1e686422f9ef71a34b8a32ecc);
+        
+    
+    var color_map_480a5164b66e41a7a7ba6df2d3041669 = {};
+
+    
+    color_map_480a5164b66e41a7a7ba6df2d3041669.color = d3.scale.threshold()
+              .domain([-4.0542184365222056e-07, -3.4734950237044996e-07, -2.892771610886794e-07, -2.312048198069088e-07, -1.7313247852513822e-07, -1.1506013724336765e-07, -5.698779596159704e-08, 1.0845453201735075e-09, 5.915688660194411e-08, 1.1722922788371471e-07, 1.7530156916548527e-07, 2.3337391044725582e-07, 2.9144625172902647e-07, 3.49518593010797e-07, 4.075909342925676e-07, 4.656632755743381e-07, 5.237356168561088e-07, 5.818079581378793e-07, 6.3988029941965e-07, 6.979526407014206e-07, 7.560249819831911e-07, 8.140973232649617e-07, 8.721696645467322e-07, 9.302420058285028e-07, 9.883143471102735e-07, 1.046386688392044e-06, 1.1044590296738146e-06, 1.162531370955585e-06, 1.2206037122373557e-06, 1.2786760535191264e-06, 1.3367483948008968e-06, 1.3948207360826675e-06, 1.4528930773644381e-06, 1.5109654186462088e-06, 1.5690377599279792e-06, 1.62711010120975e-06, 1.6851824424915205e-06, 1.743254783773291e-06, 1.8013271250550619e-06, 1.8593994663368323e-06, 1.9174718076186027e-06, 1.9755441489003736e-06, 2.033616490182144e-06, 2.0916888314639145e-06, 2.149761172745685e-06, 2.207833514027456e-06, 2.2659058553092263e-06, 2.3239781965909967e-06, 2.3820505378727676e-06, 2.440122879154538e-06, 2.4981952204363085e-06, 2.5562675617180793e-06, 2.6143399029998498e-06, 2.6724122442816202e-06, 2.7304845855633907e-06, 2.7885569268451615e-06, 2.846629268126932e-06, 2.9047016094087024e-06, 2.9627739506904733e-06, 3.0208462919722437e-06, 3.078918633254014e-06, 3.136990974535785e-06, 3.1950633158175555e-06, 3.253135657099326e-06, 3.311207998381097e-06, 3.3692803396628672e-06, 3.427352680944638e-06, 3.4854250222264086e-06, 3.543497363508179e-06, 3.6015697047899503e-06, 3.6596420460717207e-06, 3.717714387353491e-06, 3.7757867286352616e-06, 3.833859069917032e-06, 3.8919314111988025e-06, 3.950003752480573e-06, 4.008076093762344e-06, 4.066148435044115e-06, 4.124220776325885e-06, 4.182293117607656e-06, 4.240365458889426e-06, 4.2984378001711965e-06, 4.356510141452968e-06, 4.414582482734738e-06, 4.472654824016509e-06, 4.530727165298279e-06, 4.5887995065800496e-06, 4.64687184786182e-06, 4.7049441891435904e-06, 4.763016530425362e-06, 4.821088871707132e-06, 4.879161212988903e-06, 4.937233554270673e-06, 4.9953058955524435e-06, 5.053378236834214e-06, 5.111450578115984e-06, 5.169522919397756e-06, 5.227595260679526e-06, 5.285667601961297e-06, 5.343739943243067e-06, 5.4018122845248375e-06, 5.459884625806608e-06, 5.517956967088379e-06, 5.57602930837015e-06, 5.63410164965192e-06, 5.6921739909336905e-06, 5.750246332215461e-06, 5.8083186734972314e-06, 5.866391014779002e-06, 5.924463356060773e-06, 5.982535697342544e-06, 6.040608038624314e-06, 6.0986803799060845e-06, 6.156752721187855e-06, 6.214825062469625e-06, 6.272897403751397e-06, 6.330969745033167e-06, 6.389042086314938e-06, 6.447114427596708e-06, 6.5051867688784785e-06, 6.563259110160249e-06, 6.621331451442019e-06, 6.679403792723791e-06, 6.737476134005561e-06, 6.7955484752873315e-06, 6.853620816569102e-06, 6.9116931578508724e-06, 6.969765499132643e-06, 7.027837840414414e-06, 7.085910181696185e-06, 7.143982522977955e-06, 7.2020548642597255e-06, 7.260127205541497e-06, 7.318199546823267e-06, 7.376271888105038e-06, 7.434344229386808e-06, 7.4924165706685786e-06, 7.550488911950349e-06, 7.608561253232121e-06, 7.666633594513892e-06, 7.724705935795662e-06, 7.782778277077432e-06, 7.840850618359203e-06, 7.898922959640973e-06, 7.956995300922744e-06, 8.015067642204514e-06, 8.073139983486285e-06, 8.131212324768055e-06, 8.189284666049826e-06, 8.247357007331596e-06, 8.305429348613366e-06, 8.363501689895139e-06, 8.421574031176909e-06, 8.47964637245868e-06, 8.53771871374045e-06, 8.59579105502222e-06, 8.653863396303991e-06, 8.711935737585761e-06, 8.770008078867532e-06, 8.828080420149302e-06, 8.886152761431073e-06, 8.944225102712843e-06, 9.002297443994614e-06, 9.060369785276384e-06, 9.118442126558156e-06, 9.176514467839927e-06, 9.234586809121697e-06, 9.292659150403467e-06, 9.350731491685238e-06, 9.408803832967008e-06, 9.466876174248779e-06, 9.52494851553055e-06, 9.58302085681232e-06, 9.64109319809409e-06, 9.69916553937586e-06, 9.757237880657631e-06, 9.815310221939401e-06, 9.873382563221174e-06, 9.931454904502944e-06, 9.989527245784714e-06, 1.0047599587066485e-05, 1.0105671928348255e-05, 1.0163744269630026e-05, 1.0221816610911796e-05, 1.0279888952193567e-05, 1.0337961293475337e-05, 1.0396033634757108e-05, 1.0454105976038878e-05, 1.0512178317320648e-05, 1.0570250658602419e-05, 1.062832299988419e-05, 1.0686395341165962e-05, 1.0744467682447732e-05, 1.0802540023729502e-05, 1.0860612365011273e-05, 1.0918684706293043e-05, 1.0976757047574814e-05, 1.1034829388856584e-05, 1.1092901730138355e-05, 1.1150974071420125e-05, 1.1209046412701896e-05, 1.1267118753983666e-05, 1.1325191095265436e-05, 1.1383263436547207e-05, 1.1441335777828979e-05, 1.149940811911075e-05, 1.155748046039252e-05, 1.161555280167429e-05, 1.167362514295606e-05, 1.1731697484237831e-05, 1.1789769825519602e-05, 1.1847842166801372e-05, 1.1905914508083143e-05, 1.1963986849364913e-05, 1.2022059190646683e-05, 1.2080131531928454e-05, 1.2138203873210224e-05, 1.2196276214491996e-05, 1.2254348555773767e-05, 1.2312420897055537e-05, 1.2370493238337308e-05, 1.2428565579619078e-05, 1.2486637920900849e-05, 1.2544710262182619e-05, 1.260278260346439e-05, 1.266085494474616e-05, 1.271892728602793e-05, 1.2776999627309701e-05, 1.2835071968591471e-05, 1.2893144309873242e-05, 1.2951216651155014e-05, 1.3009288992436784e-05, 1.3067361333718555e-05, 1.3125433675000325e-05, 1.3183506016282096e-05, 1.3241578357563866e-05, 1.3299650698845637e-05, 1.3357723040127407e-05, 1.3415795381409178e-05, 1.3473867722690948e-05, 1.3531940063972718e-05, 1.3590012405254489e-05, 1.364808474653626e-05, 1.3706157087818031e-05, 1.3764229429099802e-05, 1.3822301770381572e-05, 1.3880374111663343e-05, 1.3938446452945113e-05, 1.3996518794226884e-05, 1.4054591135508654e-05, 1.4112663476790425e-05, 1.4170735818072195e-05, 1.4228808159353965e-05, 1.4286880500635736e-05, 1.4344952841917506e-05, 1.4403025183199277e-05, 1.4461097524481049e-05, 1.451916986576282e-05, 1.457724220704459e-05, 1.463531454832636e-05, 1.469338688960813e-05, 1.4751459230889901e-05, 1.4809531572171672e-05, 1.4867603913453444e-05, 1.4925676254735214e-05, 1.4983748596016985e-05, 1.5041820937298755e-05, 1.5099893278580525e-05, 1.5157965619862296e-05, 1.5216037961144066e-05, 1.5274110302425837e-05, 1.5332182643707607e-05, 1.5390254984989378e-05, 1.5448327326271148e-05, 1.550639966755292e-05, 1.556447200883469e-05, 1.5622544350116463e-05, 1.5680616691398233e-05, 1.5738689032680004e-05, 1.5796761373961774e-05, 1.5854833715243545e-05, 1.5912906056525315e-05, 1.5970978397807086e-05, 1.6029050739088856e-05, 1.6087123080370626e-05, 1.6145195421652397e-05, 1.6203267762934167e-05, 1.6261340104215938e-05, 1.6319412445497708e-05, 1.637748478677948e-05, 1.643555712806125e-05, 1.649362946934302e-05, 1.655170181062479e-05, 1.660977415190656e-05, 1.666784649318833e-05, 1.67259188344701e-05, 1.6783991175751872e-05, 1.6842063517033642e-05, 1.6900135858315413e-05, 1.6958208199597183e-05, 1.7016280540878954e-05, 1.7074352882160724e-05, 1.7132425223442498e-05, 1.7190497564724268e-05, 1.724856990600604e-05, 1.730664224728781e-05, 1.736471458856958e-05, 1.742278692985135e-05, 1.748085927113312e-05, 1.753893161241489e-05, 1.759700395369666e-05, 1.7655076294978432e-05, 1.7713148636260202e-05, 1.7771220977541973e-05, 1.7829293318823743e-05, 1.7887365660105514e-05, 1.7945438001387284e-05, 1.8003510342669055e-05, 1.8061582683950825e-05, 1.8119655025232595e-05, 1.8177727366514366e-05, 1.8235799707796136e-05, 1.8293872049077907e-05, 1.8351944390359677e-05, 1.8410016731641448e-05, 1.8468089072923218e-05, 1.852616141420499e-05, 1.858423375548676e-05, 1.8642306096768533e-05, 1.8700378438050303e-05, 1.8758450779332074e-05, 1.8816523120613844e-05, 1.8874595461895615e-05, 1.8932667803177385e-05, 1.8990740144459155e-05, 1.9048812485740926e-05, 1.9106884827022696e-05, 1.9164957168304467e-05, 1.9223029509586237e-05, 1.9281101850868008e-05, 1.9339174192149778e-05, 1.939724653343155e-05, 1.945531887471332e-05, 1.951339121599509e-05, 1.957146355727686e-05, 1.962953589855863e-05, 1.96876082398404e-05, 1.974568058112217e-05, 1.980375292240394e-05, 1.9861825263685712e-05, 1.9919897604967483e-05, 1.9977969946249253e-05, 2.0036042287531023e-05, 2.0094114628812794e-05, 2.0152186970094568e-05, 2.0210259311376338e-05, 2.026833165265811e-05, 2.032640399393988e-05, 2.038447633522165e-05, 2.044254867650342e-05, 2.050062101778519e-05, 2.055869335906696e-05, 2.061676570034873e-05, 2.0674838041630502e-05, 2.0732910382912272e-05, 2.0790982724194043e-05, 2.0849055065475813e-05, 2.0907127406757584e-05, 2.0965199748039354e-05, 2.1023272089321124e-05, 2.1081344430602895e-05, 2.1139416771884665e-05, 2.1197489113166436e-05, 2.1255561454448206e-05, 2.1313633795729977e-05, 2.1371706137011747e-05, 2.1429778478293518e-05, 2.1487850819575288e-05, 2.154592316085706e-05, 2.160399550213883e-05, 2.16620678434206e-05, 2.1720140184702373e-05, 2.1778212525984144e-05, 2.1836284867265914e-05, 2.1894357208547684e-05, 2.1952429549829455e-05, 2.2010501891111225e-05, 2.2068574232392996e-05, 2.2126646573674766e-05, 2.2184718914956537e-05, 2.2242791256238307e-05, 2.2300863597520078e-05, 2.2358935938801848e-05, 2.241700828008362e-05, 2.247508062136539e-05, 2.253315296264716e-05, 2.259122530392893e-05, 2.26492976452107e-05, 2.270736998649247e-05, 2.276544232777424e-05, 2.282351466905601e-05, 2.2881587010337782e-05, 2.2939659351619552e-05, 2.2997731692901323e-05, 2.3055804034183093e-05, 2.3113876375464864e-05, 2.3171948716746634e-05, 2.3230021058028408e-05, 2.328809339931018e-05, 2.334616574059195e-05, 2.340423808187372e-05, 2.346231042315549e-05, 2.352038276443726e-05, 2.357845510571903e-05, 2.36365274470008e-05, 2.369459978828257e-05, 2.3752672129564342e-05, 2.3810744470846113e-05, 2.3868816812127883e-05, 2.3926889153409653e-05, 2.3984961494691424e-05, 2.4043033835973194e-05, 2.4101106177254965e-05, 2.4159178518536735e-05, 2.4217250859818506e-05, 2.4275323201100276e-05, 2.4333395542382047e-05, 2.4391467883663817e-05, 2.4449540224945587e-05, 2.4507612566227358e-05, 2.456568490750913e-05, 2.46237572487909e-05, 2.468182959007267e-05, 2.4739901931354443e-05, 2.4797974272636213e-05, 2.4856046613917984e-05, 2.4914118955199754e-05, 2.4972191296481525e-05, 2.5030263637763295e-05, 2.5088335979045066e-05, 2.5146408320326836e-05, 2.5204480661608607e-05, 2.5262553002890377e-05, 2.5320625344172147e-05, 2.5378697685453918e-05, 2.543677002673569e-05, 2.549484236801746e-05, 2.555291470929923e-05, 2.5610987050581e-05, 2.566905939186277e-05, 2.572713173314454e-05, 2.578520407442631e-05, 2.584327641570808e-05, 2.5901348756989852e-05, 2.5959421098271622e-05, 2.6017493439553393e-05, 2.6075565780835163e-05, 2.6133638122116934e-05, 2.6191710463398704e-05, 2.6249782804680478e-05, 2.630785514596225e-05, 2.636592748724402e-05, 2.642399982852579e-05, 2.648207216980756e-05, 2.654014451108933e-05, 2.65982168523711e-05, 2.665628919365287e-05, 2.671436153493464e-05, 2.6772433876216412e-05, 2.6830506217498182e-05, 2.6888578558779953e-05, 2.6946650900061723e-05, 2.7004723241343494e-05, 2.7062795582625264e-05, 2.7120867923907035e-05, 2.7178940265188805e-05, 2.7237012606470576e-05, 2.7295084947752346e-05, 2.7353157289034116e-05, 2.7411229630315887e-05, 2.7469301971597657e-05, 2.7527374312879428e-05, 2.7585446654161198e-05, 2.764351899544297e-05, 2.770159133672474e-05, 2.775966367800651e-05, 2.7817736019288283e-05, 2.7875808360570054e-05, 2.7933880701851824e-05, 2.7991953043133595e-05, 2.8050025384415365e-05, 2.8108097725697136e-05, 2.8166170066978906e-05, 2.8224242408260677e-05, 2.8282314749542447e-05, 2.8340387090824217e-05, 2.8398459432105988e-05, 2.8456531773387758e-05, 2.851460411466953e-05, 2.85726764559513e-05])
+              .range(['#0000ffff', '#0101ffff', '#0202ffff', '#0303ffff', '#0404ffff', '#0505ffff', '#0606ffff', '#0707ffff', '#0808ffff', '#0909ffff', '#0a0affff', '#0b0bffff', '#0c0cffff', '#0d0dffff', '#0e0effff', '#0f0fffff', '#1010ffff', '#1111ffff', '#1212ffff', '#1313ffff', '#1414ffff', '#1515ffff', '#1616ffff', '#1717ffff', '#1818ffff', '#1919ffff', '#1a1affff', '#1b1bffff', '#1c1cffff', '#1d1dffff', '#1e1effff', '#1f1fffff', '#2020ffff', '#2121ffff', '#2222ffff', '#2323ffff', '#2424ffff', '#2525ffff', '#2626ffff', '#2727ffff', '#2828ffff', '#2929ffff', '#2a2affff', '#2b2bffff', '#2c2cffff', '#2d2dffff', '#2e2effff', '#2f2fffff', '#3030ffff', '#3131ffff', '#3232ffff', '#3333ffff', '#3434ffff', '#3535ffff', '#3636ffff', '#3737ffff', '#3838ffff', '#3939ffff', '#3a3affff', '#3b3bffff', '#3c3cffff', '#3d3dffff', '#3e3effff', '#3f3fffff', '#4040ffff', '#4141ffff', '#4242ffff', '#4343ffff', '#4444ffff', '#4545ffff', '#4646ffff', '#4747ffff', '#4848ffff', '#4949ffff', '#4a4affff', '#4b4bffff', '#4c4cffff', '#4d4dffff', '#4e4effff', '#4f4fffff', '#5050ffff', '#5151ffff', '#5252ffff', '#5353ffff', '#5454ffff', '#5656ffff', '#5757ffff', '#5858ffff', '#5959ffff', '#5a5affff', '#5b5bffff', '#5c5cffff', '#5d5dffff', '#5e5effff', '#5f5fffff', '#6060ffff', '#6161ffff', '#6262ffff', '#6363ffff', '#6464ffff', '#6565ffff', '#6666ffff', '#6767ffff', '#6868ffff', '#6969ffff', '#6a6affff', '#6b6bffff', '#6c6cffff', '#6d6dffff', '#6e6effff', '#6f6fffff', '#7070ffff', '#7171ffff', '#7272ffff', '#7373ffff', '#7474ffff', '#7575ffff', '#7676ffff', '#7777ffff', '#7878ffff', '#7979ffff', '#7a7affff', '#7b7bffff', '#7c7cffff', '#7d7dffff', '#7e7effff', '#7f7fffff', '#8080ffff', '#8181ffff', '#8282ffff', '#8383ffff', '#8484ffff', '#8585ffff', '#8686ffff', '#8787ffff', '#8888ffff', '#8989ffff', '#8a8affff', '#8b8bffff', '#8c8cffff', '#8d8dffff', '#8e8effff', '#8f8fffff', '#9090ffff', '#9191ffff', '#9292ffff', '#9393ffff', '#9494ffff', '#9595ffff', '#9696ffff', '#9797ffff', '#9898ffff', '#9999ffff', '#9a9affff', '#9b9bffff', '#9c9cffff', '#9d9dffff', '#9e9effff', '#9f9fffff', '#a0a0ffff', '#a1a1ffff', '#a2a2ffff', '#a3a3ffff', '#a4a4ffff', '#a5a5ffff', '#a6a6ffff', '#a7a7ffff', '#a8a8ffff', '#a9a9ffff', '#ababffff', '#acacffff', '#adadffff', '#aeaeffff', '#afafffff', '#b0b0ffff', '#b1b1ffff', '#b2b2ffff', '#b3b3ffff', '#b4b4ffff', '#b5b5ffff', '#b6b6ffff', '#b7b7ffff', '#b8b8ffff', '#b9b9ffff', '#babaffff', '#bbbbffff', '#bcbcffff', '#bdbdffff', '#bebeffff', '#bfbfffff', '#c0c0ffff', '#c1c1ffff', '#c2c2ffff', '#c3c3ffff', '#c4c4ffff', '#c5c5ffff', '#c6c6ffff', '#c7c7ffff', '#c8c8ffff', '#c9c9ffff', '#cacaffff', '#cbcbffff', '#ccccffff', '#cdcdffff', '#ceceffff', '#cfcfffff', '#d0d0ffff', '#d1d1ffff', '#d2d2ffff', '#d3d3ffff', '#d4d4ffff', '#d5d5ffff', '#d6d6ffff', '#d7d7ffff', '#d8d8ffff', '#d9d9ffff', '#dadaffff', '#dbdbffff', '#dcdcffff', '#ddddffff', '#dedeffff', '#dfdfffff', '#e0e0ffff', '#e1e1ffff', '#e2e2ffff', '#e3e3ffff', '#e4e4ffff', '#e5e5ffff', '#e6e6ffff', '#e7e7ffff', '#e8e8ffff', '#e9e9ffff', '#eaeaffff', '#ebebffff', '#ececffff', '#ededffff', '#eeeeffff', '#efefffff', '#f0f0ffff', '#f1f1ffff', '#f2f2ffff', '#f3f3ffff', '#f4f4ffff', '#f5f5ffff', '#f6f6ffff', '#f7f7ffff', '#f8f8ffff', '#f9f9ffff', '#fafaffff', '#fbfbffff', '#fcfcffff', '#fdfdffff', '#fefeffff', '#ffffffff', '#fffefeff', '#fffdfdff', '#fffcfcff', '#fffbfbff', '#fffafaff', '#fff9f9ff', '#fff8f8ff', '#fff7f7ff', '#fff6f6ff', '#fff5f5ff', '#fff4f4ff', '#fff3f3ff', '#fff2f2ff', '#fff1f1ff', '#fff0f0ff', '#ffefefff', '#ffeeeeff', '#ffededff', '#ffececff', '#ffebebff', '#ffeaeaff', '#ffe9e9ff', '#ffe8e8ff', '#ffe7e7ff', '#ffe5e5ff', '#ffe4e4ff', '#ffe3e3ff', '#ffe2e2ff', '#ffe1e1ff', '#ffe0e0ff', '#ffdfdfff', '#ffdedeff', '#ffddddff', '#ffdcdcff', '#ffdbdbff', '#ffdadaff', '#ffd9d9ff', '#ffd8d8ff', '#ffd7d7ff', '#ffd6d6ff', '#ffd5d5ff', '#ffd4d4ff', '#ffd3d3ff', '#ffd2d2ff', '#ffd1d1ff', '#ffd0d0ff', '#ffcfcfff', '#ffceceff', '#ffcdcdff', '#ffcbcbff', '#ffcacaff', '#ffc9c9ff', '#ffc8c8ff', '#ffc7c7ff', '#ffc6c6ff', '#ffc5c5ff', '#ffc4c4ff', '#ffc3c3ff', '#ffc2c2ff', '#ffc1c1ff', '#ffc0c0ff', '#ffbfbfff', '#ffbebeff', '#ffbdbdff', '#ffbcbcff', '#ffbbbbff', '#ffbabaff', '#ffb9b9ff', '#ffb8b8ff', '#ffb7b7ff', '#ffb6b6ff', '#ffb5b5ff', '#ffb4b4ff', '#ffb2b2ff', '#ffb1b1ff', '#ffb0b0ff', '#ffafafff', '#ffaeaeff', '#ffadadff', '#ffacacff', '#ffababff', '#ffaaaaff', '#ffa9a9ff', '#ffa8a8ff', '#ffa7a7ff', '#ffa6a6ff', '#ffa5a5ff', '#ffa4a4ff', '#ffa3a3ff', '#ffa2a2ff', '#ffa1a1ff', '#ffa0a0ff', '#ff9f9fff', '#ff9e9eff', '#ff9d9dff', '#ff9c9cff', '#ff9b9bff', '#ff9a9aff', '#ff9898ff', '#ff9797ff', '#ff9696ff', '#ff9595ff', '#ff9494ff', '#ff9393ff', '#ff9292ff', '#ff9191ff', '#ff9090ff', '#ff8f8fff', '#ff8e8eff', '#ff8d8dff', '#ff8c8cff', '#ff8b8bff', '#ff8a8aff', '#ff8989ff', '#ff8888ff', '#ff8787ff', '#ff8686ff', '#ff8585ff', '#ff8484ff', '#ff8383ff', '#ff8282ff', '#ff8181ff', '#ff7f7fff', '#ff7e7eff', '#ff7d7dff', '#ff7c7cff', '#ff7b7bff', '#ff7a7aff', '#ff7979ff', '#ff7878ff', '#ff7777ff', '#ff7676ff', '#ff7575ff', '#ff7474ff', '#ff7373ff', '#ff7272ff', '#ff7171ff', '#ff7070ff', '#ff6f6fff', '#ff6e6eff', '#ff6d6dff', '#ff6c6cff', '#ff6b6bff', '#ff6a6aff', '#ff6969ff', '#ff6868ff', '#ff6767ff', '#ff6565ff', '#ff6464ff', '#ff6363ff', '#ff6262ff', '#ff6161ff', '#ff6060ff', '#ff5f5fff', '#ff5e5eff', '#ff5d5dff', '#ff5c5cff', '#ff5b5bff', '#ff5a5aff', '#ff5959ff', '#ff5858ff', '#ff5757ff', '#ff5656ff', '#ff5555ff', '#ff5454ff', '#ff5353ff', '#ff5252ff', '#ff5151ff', '#ff5050ff', '#ff4f4fff', '#ff4e4eff', '#ff4d4dff', '#ff4b4bff', '#ff4a4aff', '#ff4949ff', '#ff4848ff', '#ff4747ff', '#ff4646ff', '#ff4545ff', '#ff4444ff', '#ff4343ff', '#ff4242ff', '#ff4141ff', '#ff4040ff', '#ff3f3fff', '#ff3e3eff', '#ff3d3dff', '#ff3c3cff', '#ff3b3bff', '#ff3a3aff', '#ff3939ff', '#ff3838ff', '#ff3737ff', '#ff3636ff', '#ff3535ff', '#ff3434ff', '#ff3232ff', '#ff3131ff', '#ff3030ff', '#ff2f2fff', '#ff2e2eff', '#ff2d2dff', '#ff2c2cff', '#ff2b2bff', '#ff2a2aff', '#ff2929ff', '#ff2828ff', '#ff2727ff', '#ff2626ff', '#ff2525ff', '#ff2424ff', '#ff2323ff', '#ff2222ff', '#ff2121ff', '#ff2020ff', '#ff1f1fff', '#ff1e1eff', '#ff1d1dff', '#ff1c1cff', '#ff1b1bff', '#ff1a1aff', '#ff1818ff', '#ff1717ff', '#ff1616ff', '#ff1515ff', '#ff1414ff', '#ff1313ff', '#ff1212ff', '#ff1111ff', '#ff1010ff', '#ff0f0fff', '#ff0e0eff', '#ff0d0dff', '#ff0c0cff', '#ff0b0bff', '#ff0a0aff', '#ff0909ff', '#ff0808ff', '#ff0707ff', '#ff0606ff', '#ff0505ff', '#ff0404ff', '#ff0303ff', '#ff0202ff', '#ff0101ff', '#ff0000ff']);
+    
+
+    color_map_480a5164b66e41a7a7ba6df2d3041669.x = d3.scale.linear()
+              .domain([-4.0542184365222056e-07, 2.85726764559513e-05])
+              .range([0, 400]);
+
+    color_map_480a5164b66e41a7a7ba6df2d3041669.legend = L.control({position: 'topright'});
+    color_map_480a5164b66e41a7a7ba6df2d3041669.legend.onAdd = function (map) {var div = L.DomUtil.create('div', 'legend'); return div};
+    color_map_480a5164b66e41a7a7ba6df2d3041669.legend.addTo(map_560ad6f1e686422f9ef71a34b8a32ecc);
+
+    color_map_480a5164b66e41a7a7ba6df2d3041669.xAxis = d3.svg.axis()
+        .scale(color_map_480a5164b66e41a7a7ba6df2d3041669.x)
+        .orient("top")
+        .tickSize(1)
+        .tickValues([-4.0542184365222056e-07, 1.428633822797565e-05, 2.85726764559513e-05]);
+
+    color_map_480a5164b66e41a7a7ba6df2d3041669.svg = d3.select(".legend.leaflet-control").append("svg")
+        .attr("id", 'legend')
+        .attr("width", 450)
+        .attr("height", 40);
+
+    color_map_480a5164b66e41a7a7ba6df2d3041669.g = color_map_480a5164b66e41a7a7ba6df2d3041669.svg.append("g")
+        .attr("class", "key")
+        .attr("transform", "translate(25,16)");
+
+    color_map_480a5164b66e41a7a7ba6df2d3041669.g.selectAll("rect")
+        .data(color_map_480a5164b66e41a7a7ba6df2d3041669.color.range().map(function(d, i) {
+          return {
+            x0: i ? color_map_480a5164b66e41a7a7ba6df2d3041669.x(color_map_480a5164b66e41a7a7ba6df2d3041669.color.domain()[i - 1]) : color_map_480a5164b66e41a7a7ba6df2d3041669.x.range()[0],
+            x1: i < color_map_480a5164b66e41a7a7ba6df2d3041669.color.domain().length ? color_map_480a5164b66e41a7a7ba6df2d3041669.x(color_map_480a5164b66e41a7a7ba6df2d3041669.color.domain()[i]) : color_map_480a5164b66e41a7a7ba6df2d3041669.x.range()[1],
+            z: d
+          };
+        }))
+      .enter().append("rect")
+        .attr("height", 10)
+        .attr("x", function(d) { return d.x0; })
+        .attr("width", function(d) { return d.x1 - d.x0; })
+        .style("fill", function(d) { return d.z; });
+
+    color_map_480a5164b66e41a7a7ba6df2d3041669.g.call(color_map_480a5164b66e41a7a7ba6df2d3041669.xAxis).append("text")
+        .attr("class", "caption")
+        .attr("y", 21)
+        .text('Tropospheric NO2 density (mol/m^2)');
+    
+            var layer_control_24942d4af83247c48e948287a459ab31 = {
+                base_layers : {
+                    "openstreetmap" : tile_layer_6e1e4ba88cc444b6ae6e6debd6eeca40,
+                },
+                overlays :  {
+                    "Tropospheric NO2 density (mol/m^2)" : tile_layer_e2c2365e3e4d407b86c09da460c9cb09,
+                },
+            };
+            L.control.layers(
+                layer_control_24942d4af83247c48e948287a459ab31.base_layers,
+                layer_control_24942d4af83247c48e948287a459ab31.overlays,
+                {"autoZIndex": true, "collapsed": true, "position": "topright"}
+            ).addTo(map_560ad6f1e686422f9ef71a34b8a32ecc);
+        
+    
+            var marker_5a992c5cff0b44d0b6dd3163360686ad = L.marker(
+                [18.4055, -65.9077],
+                {}
+            ).addTo(map_560ad6f1e686422f9ef71a34b8a32ecc);
+        
+    
+            var icon_1cde33f8e9e941e58da987a403ce593e = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "bolt", "iconColor": "white", "markerColor": "orange", "prefix": "fa"}
+            );
+            marker_5a992c5cff0b44d0b6dd3163360686ad.setIcon(icon_1cde33f8e9e941e58da987a403ce593e);
+        
+    
+            marker_5a992c5cff0b44d0b6dd3163360686ad.bindTooltip(
+                `<div>
+                     Name: San Fermin Solar Farm <br> Fuel: Solar <br> Creation year: Unknown <br> Capacity (MW): 27.0
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_9210cdbba6864c52882360ce87d52fea = L.marker(
+                [18.2194, -67.16],
+                {}
+            ).addTo(map_560ad6f1e686422f9ef71a34b8a32ecc);
+        
+    
+            var icon_bc5fb06a69e44ce29b454f05fa78b06b = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "bolt", "iconColor": "white", "markerColor": "lightgray", "prefix": "fa"}
+            );
+            marker_9210cdbba6864c52882360ce87d52fea.setIcon(icon_bc5fb06a69e44ce29b454f05fa78b06b);
+        
+    
+            marker_9210cdbba6864c52882360ce87d52fea.bindTooltip(
+                `<div>
+                     Name: Mayag�ez <br> Fuel: Gas <br> Creation year: Unknown <br> Capacity (MW): 220.0
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_c3e2185f3b41475190faea51dda9e781 = L.marker(
+                [18.4458, -66.3914],
+                {}
+            ).addTo(map_560ad6f1e686422f9ef71a34b8a32ecc);
+        
+    
+            var icon_bc0e980a0f34449697c8468c6970c869 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "bolt", "iconColor": "white", "markerColor": "lightgray", "prefix": "fa"}
+            );
+            marker_c3e2185f3b41475190faea51dda9e781.setIcon(icon_bc0e980a0f34449697c8468c6970c869);
+        
+    
+            marker_c3e2185f3b41475190faea51dda9e781.bindTooltip(
+                `<div>
+                     Name: Vega Baja <br> Fuel: Gas <br> Creation year: Unknown <br> Capacity (MW): 42.0
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_0bd9c22d19eb496dbca5cc534875c4c1 = L.marker(
+                [18.4551, -66.1498],
+                {}
+            ).addTo(map_560ad6f1e686422f9ef71a34b8a32ecc);
+        
+    
+            var icon_c38d5b52b9a94738a04e4000149c85c6 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "bolt", "iconColor": "white", "markerColor": "lightgray", "prefix": "fa"}
+            );
+            marker_0bd9c22d19eb496dbca5cc534875c4c1.setIcon(icon_c38d5b52b9a94738a04e4000149c85c6);
+        
+    
+            marker_0bd9c22d19eb496dbca5cc534875c4c1.bindTooltip(
+                `<div>
+                     Name: Palo Seco <br> Fuel: Gas <br> Creation year: Unknown <br> Capacity (MW): 126.0
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_c1b31edfee264353aa354e4a8704f160 = L.marker(
+                [18.2325, -65.6677],
+                {}
+            ).addTo(map_560ad6f1e686422f9ef71a34b8a32ecc);
+        
+    
+            var icon_3e7659fc2fd042e3834d81c39bbe5a7d = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "bolt", "iconColor": "white", "markerColor": "lightgray", "prefix": "fa"}
+            );
+            marker_c1b31edfee264353aa354e4a8704f160.setIcon(icon_3e7659fc2fd042e3834d81c39bbe5a7d);
+        
+    
+            marker_c1b31edfee264353aa354e4a8704f160.bindTooltip(
+                `<div>
+                     Name: Daguao <br> Fuel: Gas <br> Creation year: Unknown <br> Capacity (MW): 42.0
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_a441bb93b0d14513a88e1f6ab408239f = L.marker(
+                [18.1064, -65.8249],
+                {}
+            ).addTo(map_560ad6f1e686422f9ef71a34b8a32ecc);
+        
+    
+            var icon_3f8f38afea284e5eac145bd34b972a6f = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "bolt", "iconColor": "white", "markerColor": "lightgray", "prefix": "fa"}
+            );
+            marker_a441bb93b0d14513a88e1f6ab408239f.setIcon(icon_3f8f38afea284e5eac145bd34b972a6f);
+        
+    
+            marker_a441bb93b0d14513a88e1f6ab408239f.bindTooltip(
+                `<div>
+                     Name: Yabucoa <br> Fuel: Gas <br> Creation year: Unknown <br> Capacity (MW): 42.0
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_0e203056d32b49bd839e8abcdaeeeec6 = L.marker(
+                [17.9615, -66.1402],
+                {}
+            ).addTo(map_560ad6f1e686422f9ef71a34b8a32ecc);
+        
+    
+            var icon_c4c491b5435541ca8b42306933eb90dc = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "bolt", "iconColor": "white", "markerColor": "lightgray", "prefix": "fa"}
+            );
+            marker_0e203056d32b49bd839e8abcdaeeeec6.setIcon(icon_c4c491b5435541ca8b42306933eb90dc);
+        
+    
+            marker_0e203056d32b49bd839e8abcdaeeeec6.bindTooltip(
+                `<div>
+                     Name: Jobos <br> Fuel: Gas <br> Creation year: Unknown <br> Capacity (MW): 42.0
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_d0abb5c110cf4f0d85580830155d677f = L.marker(
+                [17.9533, -66.2312],
+                {}
+            ).addTo(map_560ad6f1e686422f9ef71a34b8a32ecc);
+        
+    
+            var icon_2cb0b6bf83464d25b5c4be226be9c937 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "bolt", "iconColor": "white", "markerColor": "lightgray", "prefix": "fa"}
+            );
+            marker_d0abb5c110cf4f0d85580830155d677f.setIcon(icon_2cb0b6bf83464d25b5c4be226be9c937);
+        
+    
+            marker_d0abb5c110cf4f0d85580830155d677f.bindTooltip(
+                `<div>
+                     Name: Aguirre <br> Fuel: Gas <br> Creation year: Unknown <br> Capacity (MW): 42.0
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_305c829b45ff4d9aa7b6d9f00872fc36 = L.marker(
+                [18.0018, -66.7537],
+                {}
+            ).addTo(map_560ad6f1e686422f9ef71a34b8a32ecc);
+        
+    
+            var icon_946691e0194645a7a155fed2fc9404a8 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "bolt", "iconColor": "white", "markerColor": "lightgray", "prefix": "fa"}
+            );
+            marker_305c829b45ff4d9aa7b6d9f00872fc36.setIcon(icon_946691e0194645a7a155fed2fc9404a8);
+        
+    
+            marker_305c829b45ff4d9aa7b6d9f00872fc36.bindTooltip(
+                `<div>
+                     Name: Costa Sur <br> Fuel: Gas <br> Creation year: Unknown <br> Capacity (MW): 42.0
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_2f670eea81094946ba05a6a2f49120e7 = L.marker(
+                [17.9812, -66.7552],
+                {}
+            ).addTo(map_560ad6f1e686422f9ef71a34b8a32ecc);
+        
+    
+            var icon_128780c26cc14216ad5b40be4f44a737 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "bolt", "iconColor": "white", "markerColor": "lightgray", "prefix": "fa"}
+            );
+            marker_2f670eea81094946ba05a6a2f49120e7.setIcon(icon_128780c26cc14216ad5b40be4f44a737);
+        
+    
+            marker_2f670eea81094946ba05a6a2f49120e7.bindTooltip(
+                `<div>
+                     Name: EcoEl�ctrica <br> Fuel: Gas <br> Creation year: Unknown <br> Capacity (MW): 507.0
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_50c132085ff349579d16341826c73320 = L.marker(
+                [18.2397, -66.6691],
+                {}
+            ).addTo(map_560ad6f1e686422f9ef71a34b8a32ecc);
+        
+    
+            var icon_8189ff6395c843709111ec71ff1f3d6e = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "bolt", "iconColor": "white", "markerColor": "lightblue", "prefix": "fa"}
+            );
+            marker_50c132085ff349579d16341826c73320.setIcon(icon_8189ff6395c843709111ec71ff1f3d6e);
+        
+    
+            marker_50c132085ff349579d16341826c73320.bindTooltip(
+                `<div>
+                     Name: Caonillas 2 <br> Fuel: Hydro <br> Creation year: Unknown <br> Capacity (MW): 3.6
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_3887a57a7afa4728b27aa0d4e60ef108 = L.marker(
+                [18.4691, -66.6968],
+                {}
+            ).addTo(map_560ad6f1e686422f9ef71a34b8a32ecc);
+        
+    
+            var icon_8ae829f0b4f6417bb4f8079dd1f8fb52 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "bolt", "iconColor": "white", "markerColor": "black", "prefix": "fa"}
+            );
+            marker_3887a57a7afa4728b27aa0d4e60ef108.setIcon(icon_8ae829f0b4f6417bb4f8079dd1f8fb52);
+        
+    
+            marker_3887a57a7afa4728b27aa0d4e60ef108.bindTooltip(
+                `<div>
+                     Name: Cambalache <br> Fuel: Oil <br> Creation year: Unknown <br> Capacity (MW): 247.5
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_f357b5acf2be4096970509866fa4aede = L.marker(
+                [18.427, -66.1045],
+                {}
+            ).addTo(map_560ad6f1e686422f9ef71a34b8a32ecc);
+        
+    
+            var icon_583151f99f0d4da3b5d04bb8a0c967c7 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "bolt", "iconColor": "white", "markerColor": "black", "prefix": "fa"}
+            );
+            marker_f357b5acf2be4096970509866fa4aede.setIcon(icon_583151f99f0d4da3b5d04bb8a0c967c7);
+        
+    
+            marker_f357b5acf2be4096970509866fa4aede.bindTooltip(
+                `<div>
+                     Name: San Juan CC <br> Fuel: Oil <br> Creation year: 2009 <br> Capacity (MW): 864.0
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_2bd9b185614143daa66f6736c70ff02b = L.marker(
+                [18.4553, -66.1486],
+                {}
+            ).addTo(map_560ad6f1e686422f9ef71a34b8a32ecc);
+        
+    
+            var icon_cef72181044f4d2b8ad3ba58aaa4e626 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "bolt", "iconColor": "white", "markerColor": "black", "prefix": "fa"}
+            );
+            marker_2bd9b185614143daa66f6736c70ff02b.setIcon(icon_cef72181044f4d2b8ad3ba58aaa4e626);
+        
+    
+            marker_2bd9b185614143daa66f6736c70ff02b.bindTooltip(
+                `<div>
+                     Name: Palo Seco <br> Fuel: Oil <br> Creation year: 1960 <br> Capacity (MW): 602.0
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_7d51b162effb4b17a71e8a34150ae53c = L.marker(
+                [17.9519, -66.2308],
+                {}
+            ).addTo(map_560ad6f1e686422f9ef71a34b8a32ecc);
+        
+    
+            var icon_9901c9ebe1824e3b874250c5327ea02e = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "bolt", "iconColor": "white", "markerColor": "black", "prefix": "fa"}
+            );
+            marker_7d51b162effb4b17a71e8a34150ae53c.setIcon(icon_9901c9ebe1824e3b874250c5327ea02e);
+        
+    
+            marker_7d51b162effb4b17a71e8a34150ae53c.bindTooltip(
+                `<div>
+                     Name: Aguirre <br> Fuel: Oil <br> Creation year: 1975 <br> Capacity (MW): 1492.0
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_88db8063224347619718cfcf3bcb2563 = L.marker(
+                [18.0003, -66.7534],
+                {}
+            ).addTo(map_560ad6f1e686422f9ef71a34b8a32ecc);
+        
+    
+            var icon_c61772c17a6e4434b4d7df988391cd0f = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "bolt", "iconColor": "white", "markerColor": "black", "prefix": "fa"}
+            );
+            marker_88db8063224347619718cfcf3bcb2563.setIcon(icon_c61772c17a6e4434b4d7df988391cd0f);
+        
+    
+            marker_88db8063224347619718cfcf3bcb2563.bindTooltip(
+                `<div>
+                     Name: Costa Sur <br> Fuel: Oil <br> Creation year: 1962 <br> Capacity (MW): 990.0
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_ffb222fec23640a092e416cc1c4fdba4 = L.marker(
+                [18.1318, -66.4879],
+                {}
+            ).addTo(map_560ad6f1e686422f9ef71a34b8a32ecc);
+        
+    
+            var icon_224613361e8c4c99906435281d91e2a3 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "bolt", "iconColor": "white", "markerColor": "lightblue", "prefix": "fa"}
+            );
+            marker_ffb222fec23640a092e416cc1c4fdba4.setIcon(icon_224613361e8c4c99906435281d91e2a3);
+        
+    
+            marker_ffb222fec23640a092e416cc1c4fdba4.bindTooltip(
+                `<div>
+                     Name: Toro Negro 1 <br> Fuel: Hydro <br> Creation year: 1929 <br> Capacity (MW): 8.64
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_53729117e1ae4ed19930992d3eb9789b = L.marker(
+                [18.4729, -67.0443],
+                {}
+            ).addTo(map_560ad6f1e686422f9ef71a34b8a32ecc);
+        
+    
+            var icon_388731815e304525942152f01f2ec57f = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "bolt", "iconColor": "white", "markerColor": "orange", "prefix": "fa"}
+            );
+            marker_53729117e1ae4ed19930992d3eb9789b.setIcon(icon_388731815e304525942152f01f2ec57f);
+        
+    
+            marker_53729117e1ae4ed19930992d3eb9789b.bindTooltip(
+                `<div>
+                     Name: Oriana Solar Farm <br> Fuel: Solar <br> Creation year: 2015 <br> Capacity (MW): 57.65
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_b687b6167cca4d039f056924d033ae9c = L.marker(
+                [17.9786, -66.2205],
+                {}
+            ).addTo(map_560ad6f1e686422f9ef71a34b8a32ecc);
+        
+    
+            var icon_be6a5dfd115a43daa30e2811f375231a = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "bolt", "iconColor": "white", "markerColor": "orange", "prefix": "fa"}
+            );
+            marker_b687b6167cca4d039f056924d033ae9c.setIcon(icon_be6a5dfd115a43daa30e2811f375231a);
+        
+    
+            marker_b687b6167cca4d039f056924d033ae9c.bindTooltip(
+                `<div>
+                     Name: Salinas <br> Fuel: Solar <br> Creation year: Unknown <br> Capacity (MW): 15.5
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_c1e45e0d89784d449406c211b558cb13 = L.marker(
+                [18.0941, -66.7346],
+                {}
+            ).addTo(map_560ad6f1e686422f9ef71a34b8a32ecc);
+        
+    
+            var icon_d39003ef18d74413b57d5efb4a83f552 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "bolt", "iconColor": "white", "markerColor": "lightblue", "prefix": "fa"}
+            );
+            marker_c1e45e0d89784d449406c211b558cb13.setIcon(icon_d39003ef18d74413b57d5efb4a83f552);
+        
+    
+            marker_c1e45e0d89784d449406c211b558cb13.bindTooltip(
+                `<div>
+                     Name: Garzas 1 <br> Fuel: Hydro <br> Creation year: 1941 <br> Capacity (MW): 7.2
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_4c9ff8e644cd485c8ac79e548e036e11 = L.marker(
+                [18.1664, -66.5116],
+                {}
+            ).addTo(map_560ad6f1e686422f9ef71a34b8a32ecc);
+        
+    
+            var icon_4dff61f0185d4870be742c4a894fd6c0 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "bolt", "iconColor": "white", "markerColor": "lightblue", "prefix": "fa"}
+            );
+            marker_4c9ff8e644cd485c8ac79e548e036e11.setIcon(icon_4dff61f0185d4870be742c4a894fd6c0);
+        
+    
+            marker_4c9ff8e644cd485c8ac79e548e036e11.bindTooltip(
+                `<div>
+                     Name: Toro Negro 2 <br> Fuel: Hydro <br> Creation year: 1937 <br> Capacity (MW): 1.92
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_8e3bbbc3ff7b44d1bf8f96193db4f0e5 = L.marker(
+                [18.0727, -66.7305],
+                {}
+            ).addTo(map_560ad6f1e686422f9ef71a34b8a32ecc);
+        
+    
+            var icon_174ee2bc624641d58a2781364f0103f9 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "bolt", "iconColor": "white", "markerColor": "lightblue", "prefix": "fa"}
+            );
+            marker_8e3bbbc3ff7b44d1bf8f96193db4f0e5.setIcon(icon_174ee2bc624641d58a2781364f0103f9);
+        
+    
+            marker_8e3bbbc3ff7b44d1bf8f96193db4f0e5.bindTooltip(
+                `<div>
+                     Name: Garzas 2 <br> Fuel: Hydro <br> Creation year: 1941 <br> Capacity (MW): 5.04
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_b4d4ca8e16234f01ae0372cb9b48a7b1 = L.marker(
+                [17.9474, -66.1494],
+                {}
+            ).addTo(map_560ad6f1e686422f9ef71a34b8a32ecc);
+        
+    
+            var icon_f5e3244f0f7d41cebd966401e14c719a = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "bolt", "iconColor": "white", "markerColor": "darkred", "prefix": "fa"}
+            );
+            marker_b4d4ca8e16234f01ae0372cb9b48a7b1.setIcon(icon_f5e3244f0f7d41cebd966401e14c719a);
+        
+    
+            marker_b4d4ca8e16234f01ae0372cb9b48a7b1.bindTooltip(
+                `<div>
+                     Name: A.E.S. Corp. <br> Fuel: Coal <br> Creation year: Unknown <br> Capacity (MW): 454.3
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_93314f61b4124771887d036ffa0ba821 = L.marker(
+                [18.1868, -65.6948],
+                {}
+            ).addTo(map_560ad6f1e686422f9ef71a34b8a32ecc);
+        
+    
+            var icon_ad9bee7551534587976c591b07520d07 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "bolt", "iconColor": "white", "markerColor": "lightgreen", "prefix": "fa"}
+            );
+            marker_93314f61b4124771887d036ffa0ba821.setIcon(icon_ad9bee7551534587976c591b07520d07);
+        
+    
+            marker_93314f61b4124771887d036ffa0ba821.bindTooltip(
+                `<div>
+                     Name: Punta Lima <br> Fuel: Wind <br> Creation year: 2011 <br> Capacity (MW): 23.4
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_f0a60f784bb54248ab2727a1921f7e19 = L.marker(
+                [18.4134, -65.9028],
+                {}
+            ).addTo(map_560ad6f1e686422f9ef71a34b8a32ecc);
+        
+    
+            var icon_4851572b33754b9d911235f0173e2280 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "bolt", "iconColor": "white", "markerColor": "orange", "prefix": "fa"}
+            );
+            marker_f0a60f784bb54248ab2727a1921f7e19.setIcon(icon_4851572b33754b9d911235f0173e2280);
+        
+    
+            marker_f0a60f784bb54248ab2727a1921f7e19.bindTooltip(
+                `<div>
+                     Name: Loiza Solar Park <br> Fuel: Solar <br> Creation year: 2012 <br> Capacity (MW): 26.0
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_e6c868629c7940f1a637222a50dacbad = L.marker(
+                [17.9853, -66.398],
+                {}
+            ).addTo(map_560ad6f1e686422f9ef71a34b8a32ecc);
+        
+    
+            var icon_7fa0581e76b44287be7090182526eb39 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "bolt", "iconColor": "white", "markerColor": "lightgreen", "prefix": "fa"}
+            );
+            marker_e6c868629c7940f1a637222a50dacbad.setIcon(icon_7fa0581e76b44287be7090182526eb39);
+        
+    
+            marker_e6c868629c7940f1a637222a50dacbad.bindTooltip(
+                `<div>
+                     Name: Santa Isabel Wind Farm <br> Fuel: Wind <br> Creation year: 2012 <br> Capacity (MW): 101.2
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_ded6d58174144bcab9d2bd96b11f7f6c = L.marker(
+                [18.0623, -66.5485],
+                {}
+            ).addTo(map_560ad6f1e686422f9ef71a34b8a32ecc);
+        
+    
+            var icon_18fba0559d9b48178cf9f547443bacde = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "bolt", "iconColor": "white", "markerColor": "orange", "prefix": "fa"}
+            );
+            marker_ded6d58174144bcab9d2bd96b11f7f6c.setIcon(icon_18fba0559d9b48178cf9f547443bacde);
+        
+    
+            marker_ded6d58174144bcab9d2bd96b11f7f6c.bindTooltip(
+                `<div>
+                     Name: Windmar Ponce <br> Fuel: Solar <br> Creation year: Unknown <br> Capacity (MW): 4.5
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_12b54ea07e8f4b2ea3bb919648d020f0 = L.marker(
+                [18.2436, -65.7852],
+                {}
+            ).addTo(map_560ad6f1e686422f9ef71a34b8a32ecc);
+        
+    
+            var icon_bcbe65c1fd554be1b5c405eb74ac00e8 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "bolt", "iconColor": "white", "markerColor": "lightblue", "prefix": "fa"}
+            );
+            marker_12b54ea07e8f4b2ea3bb919648d020f0.setIcon(icon_bcbe65c1fd554be1b5c405eb74ac00e8);
+        
+    
+            marker_12b54ea07e8f4b2ea3bb919648d020f0.bindTooltip(
+                `<div>
+                     Name: R�o Blanco <br> Fuel: Hydro <br> Creation year: Unknown <br> Capacity (MW): 5.0
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_b10f6d8fe96647d59afebd469fb2c36b = L.marker(
+                [18.1429, -65.444],
+                {}
+            ).addTo(map_560ad6f1e686422f9ef71a34b8a32ecc);
+        
+    
+            var icon_a67e8e81d28a4884ac5a19ecc93cd45c = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "bolt", "iconColor": "white", "markerColor": "black", "prefix": "fa"}
+            );
+            marker_b10f6d8fe96647d59afebd469fb2c36b.setIcon(icon_a67e8e81d28a4884ac5a19ecc93cd45c);
+        
+    
+            marker_b10f6d8fe96647d59afebd469fb2c36b.bindTooltip(
+                `<div>
+                     Name: Vieques EPP <br> Fuel: Oil <br> Creation year: Unknown <br> Capacity (MW): 6.0
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_be1d5f9b7f5c42149c91ed0c5cbb6c4e = L.marker(
+                [18.0536, -66.8837],
+                {}
+            ).addTo(map_560ad6f1e686422f9ef71a34b8a32ecc);
+        
+    
+            var icon_502b7a79070a4556bce591ebd2d44d97 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "bolt", "iconColor": "white", "markerColor": "lightblue", "prefix": "fa"}
+            );
+            marker_be1d5f9b7f5c42149c91ed0c5cbb6c4e.setIcon(icon_502b7a79070a4556bce591ebd2d44d97);
+        
+    
+            marker_be1d5f9b7f5c42149c91ed0c5cbb6c4e.bindTooltip(
+                `<div>
+                     Name: Yauco 2 <br> Fuel: Hydro <br> Creation year: Unknown <br> Capacity (MW): 9.0
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_537a33aa4b754b90a514b46a3fff6c95 = L.marker(
+                [18.0447, -66.106],
+                {}
+            ).addTo(map_560ad6f1e686422f9ef71a34b8a32ecc);
+        
+    
+            var icon_fe4489f1d53c453e94e14407977b5839 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "bolt", "iconColor": "white", "markerColor": "lightblue", "prefix": "fa"}
+            );
+            marker_537a33aa4b754b90a514b46a3fff6c95.setIcon(icon_fe4489f1d53c453e94e14407977b5839);
+        
+    
+            marker_537a33aa4b754b90a514b46a3fff6c95.bindTooltip(
+                `<div>
+                     Name: Carite 1 <br> Fuel: Hydro <br> Creation year: 1915 <br> Capacity (MW): 10.0
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_fad8c09723ab4ade9def0595f30fbcb6 = L.marker(
+                [18.3359, -66.6663],
+                {}
+            ).addTo(map_560ad6f1e686422f9ef71a34b8a32ecc);
+        
+    
+            var icon_38b9b222db204d84b1a7f5bd8596d6ed = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "bolt", "iconColor": "white", "markerColor": "lightblue", "prefix": "fa"}
+            );
+            marker_fad8c09723ab4ade9def0595f30fbcb6.setIcon(icon_38b9b222db204d84b1a7f5bd8596d6ed);
+        
+    
+            marker_fad8c09723ab4ade9def0595f30fbcb6.bindTooltip(
+                `<div>
+                     Name: Dos Bocas <br> Fuel: Hydro <br> Creation year: 1942 <br> Capacity (MW): 15.0
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_39a3019a8f4d4f41bae3902c22d3e981 = L.marker(
+                [18.2961, -66.6432],
+                {}
+            ).addTo(map_560ad6f1e686422f9ef71a34b8a32ecc);
+        
+    
+            var icon_c4d1894e88c1435b9c6a1e95c4ae5f53 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "bolt", "iconColor": "white", "markerColor": "lightblue", "prefix": "fa"}
+            );
+            marker_39a3019a8f4d4f41bae3902c22d3e981.setIcon(icon_c4d1894e88c1435b9c6a1e95c4ae5f53);
+        
+    
+            marker_39a3019a8f4d4f41bae3902c22d3e981.bindTooltip(
+                `<div>
+                     Name: Caonillas 1 <br> Fuel: Hydro <br> Creation year: Unknown <br> Capacity (MW): 18.0
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_cf3c67b9915146b8ae8ff7e559ba1ccb = L.marker(
+                [17.9468, -66.1591],
+                {}
+            ).addTo(map_560ad6f1e686422f9ef71a34b8a32ecc);
+        
+    
+            var icon_84692de35eb0434a992f951cc9e3a97b = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "bolt", "iconColor": "white", "markerColor": "orange", "prefix": "fa"}
+            );
+            marker_cf3c67b9915146b8ae8ff7e559ba1ccb.setIcon(icon_84692de35eb0434a992f951cc9e3a97b);
+        
+    
+            marker_cf3c67b9915146b8ae8ff7e559ba1ccb.bindTooltip(
+                `<div>
+                     Name: AES Ilumina <br> Fuel: Solar <br> Creation year: Unknown <br> Capacity (MW): 24.0
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_ab487a76f9de43f18312b49a2012c5a3 = L.marker(
+                [18.1106, -66.8711],
+                {}
+            ).addTo(map_560ad6f1e686422f9ef71a34b8a32ecc);
+        
+    
+            var icon_baeaa191094549cdb8f393424ee15cad = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "bolt", "iconColor": "white", "markerColor": "lightblue", "prefix": "fa"}
+            );
+            marker_ab487a76f9de43f18312b49a2012c5a3.setIcon(icon_baeaa191094549cdb8f393424ee15cad);
+        
+    
+            marker_ab487a76f9de43f18312b49a2012c5a3.bindTooltip(
+                `<div>
+                     Name: Yauco 1 <br> Fuel: Hydro <br> Creation year: Unknown <br> Capacity (MW): 25.0
+                 </div>`,
+                {"sticky": true}
+            );
+        
+</script>
