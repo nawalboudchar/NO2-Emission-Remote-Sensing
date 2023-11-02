@@ -23,7 +23,7 @@
             <meta name="viewport" content="width=device-width,
                 initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
             <style>
-                #map_6483a125f6bd4fdbafd629e5cdc514f9 {
+                #map_258a248b44da47feba3b843e5e885718 {
                     position: relative;
                     width: 100.0%;
                     height: 500.0px;
@@ -35,13 +35,13 @@
 </head>
 <body>    
     
-            <div class="folium-map" id="map_6483a125f6bd4fdbafd629e5cdc514f9" ></div>
+            <div class="folium-map" id="map_258a248b44da47feba3b843e5e885718" ></div>
         
 </body>
 <script>    
     
-            var map_6483a125f6bd4fdbafd629e5cdc514f9 = L.map(
-                "map_6483a125f6bd4fdbafd629e5cdc514f9",
+            var map_258a248b44da47feba3b843e5e885718 = L.map(
+                "map_258a248b44da47feba3b843e5e885718",
                 {
                     center: [18.21646010162067, -66.4147362290886],
                     crs: L.CRS.EPSG3857,
@@ -55,37 +55,37 @@
 
         
     
-            var tile_layer_3b77452f18e94ad68125c94622749383 = L.tileLayer(
+            var tile_layer_41a39652710c418e838eae7605344a57 = L.tileLayer(
                 "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
                 {"attribution": "Data by \u0026copy; \u003ca href=\"http://openstreetmap.org\"\u003eOpenStreetMap\u003c/a\u003e, under \u003ca href=\"http://www.openstreetmap.org/copyright\"\u003eODbL\u003c/a\u003e.", "detectRetina": false, "maxNativeZoom": 18, "maxZoom": 18, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
-            ).addTo(map_6483a125f6bd4fdbafd629e5cdc514f9);
+            ).addTo(map_258a248b44da47feba3b843e5e885718);
         
     
-            var tile_layer_b9cf6915605c4771ad5eb0786f5fe17f = L.tileLayer(
-                "https://earthengine.googleapis.com/v1alpha/projects/earthengine-legacy/maps/3ee30408f742e30ee3d58d337ac9b971-582d0aad960a0648b93da1b15bae45c5/tiles/{z}/{x}/{y}",
+            var tile_layer_545452995bc842e69d45c1570912d83e = L.tileLayer(
+                "https://earthengine.googleapis.com/v1alpha/projects/earthengine-legacy/maps/3ee30408f742e30ee3d58d337ac9b971-9d9c793f7ccac6ed48e4d1a617623004/tiles/{z}/{x}/{y}",
                 {"attribution": "Map Data \u0026copy Google Earth Engine", "detectRetina": false, "maxNativeZoom": 18, "maxZoom": 18, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
-            ).addTo(map_6483a125f6bd4fdbafd629e5cdc514f9);
+            ).addTo(map_258a248b44da47feba3b843e5e885718);
         
     
-            var tile_layer_bcf9e293252349159ec984e896069bb1 = L.tileLayer(
-                "https://earthengine.googleapis.com/v1alpha/projects/earthengine-legacy/maps/83f0628bd4c96134875002fe09555375-fedb0c0175e178946e2b89134632fb98/tiles/{z}/{x}/{y}",
+            var tile_layer_70ea88857dae4636824fee031c9dd20b = L.tileLayer(
+                "https://earthengine.googleapis.com/v1alpha/projects/earthengine-legacy/maps/83f0628bd4c96134875002fe09555375-61e9f66dfed2e9eee7905d232f2690d5/tiles/{z}/{x}/{y}",
                 {"attribution": "Map Data \u0026copy Google Earth Engine", "detectRetina": false, "maxNativeZoom": 18, "maxZoom": 18, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
-            ).addTo(map_6483a125f6bd4fdbafd629e5cdc514f9);
+            ).addTo(map_258a248b44da47feba3b843e5e885718);
         
     
-            var layer_control_19cc97b529814e6e851ac6e2e45e6f09 = {
+            var layer_control_b145c70d4fc345318f968c30c78e1788 = {
                 base_layers : {
-                    "openstreetmap" : tile_layer_3b77452f18e94ad68125c94622749383,
+                    "openstreetmap" : tile_layer_41a39652710c418e838eae7605344a57,
                 },
                 overlays :  {
-                    "Power Plants" : tile_layer_b9cf6915605c4771ad5eb0786f5fe17f,
-                    "Power Plants Mask" : tile_layer_bcf9e293252349159ec984e896069bb1,
+                    "Power Plants" : tile_layer_545452995bc842e69d45c1570912d83e,
+                    "Power Plants Mask" : tile_layer_70ea88857dae4636824fee031c9dd20b,
                 },
             };
             L.control.layers(
-                layer_control_19cc97b529814e6e851ac6e2e45e6f09.base_layers,
-                layer_control_19cc97b529814e6e851ac6e2e45e6f09.overlays,
+                layer_control_b145c70d4fc345318f968c30c78e1788.base_layers,
+                layer_control_b145c70d4fc345318f968c30c78e1788.overlays,
                 {"autoZIndex": true, "collapsed": true, "position": "topright"}
-            ).addTo(map_6483a125f6bd4fdbafd629e5cdc514f9);
+            ).addTo(map_258a248b44da47feba3b843e5e885718);
         
 </script>
